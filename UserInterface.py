@@ -12,7 +12,8 @@ from PyQt5.QtWidgets import (
                              QLineEdit,
                              QLabel,
                              QRadioButton,
-                             QMessageBox
+                             QMessageBox,
+                             QWidget
                              )
 from DataAnalyzer import GraphData
 
@@ -68,13 +69,17 @@ class Window(QMainWindow):
         label_4.setGeometry(QtCore.QRect(400, 141, 47, 13))
         label_4.setObjectName("label_4")
         self.pushButton_2 = QPushButton("Graph Data",self)
-        self.pushButton_2.setGeometry(QtCore.QRect(284, 200, 201, 61))
+        self.pushButton_2.setGeometry(QtCore.QRect(335, 200, 150, 61))
         self.pushButton_2.setObjectName("pushButton_2")
         self.pushButton_2.clicked.connect(self.clickGraph)
         self.pushButton_3 = QPushButton("Preview File", self)
-        self.pushButton_3.setGeometry(QtCore.QRect(70, 200, 201, 61))
-        self.pushButton_3.setObjectName("pushButton_2")
+        self.pushButton_3.setGeometry(QtCore.QRect(180, 200, 150, 61))
+        self.pushButton_3.setObjectName("pushButton_3")
         self.pushButton_3.clicked.connect(self.preview)
+        self.pushButton_4 = QPushButton("Live Mode", self)
+        self.pushButton_4.setGeometry(QtCore.QRect(70, 200, 150, 61))
+        self.pushButton_4.setObjectName("pushButton_4")
+        self.pushButton_4.clicked.connect(self.buildExamplePopup())
 
 
         self.show()
@@ -168,6 +173,22 @@ class Window(QMainWindow):
         msg.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
         #msg.buttonClicked.connect(msgbtn)
 
+    def buildExamplePopup(self):
+        name ="POPUP"
+        self.exPopup = examplePopup(name)
+        self.exPopup.setGeometry(100, 200, 100, 100)
+        self.exPopup.show()
+
+class examplePopup(QWidget):
+    def __init__(self, name):
+        super().__init__()
+
+        self.name = name
+
+        self.initUI()
+
+    def initUI(self):
+        lblName = QLabel(self.name, self)
 
 app = QApplication(sys.argv)
 GUI = Window()
